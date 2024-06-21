@@ -1,0 +1,52 @@
+import tkinter as tk
+import socket
+import threading
+import sys
+
+def start_client(server_ip):
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((server_ip, 12346))  # Connect to the server at the specified IP and port
+    print(f"Connected to server at {server_ip}")
+
+    # Function to receive messages from the server
+    def receive_messages():
+        while True:
+            message = client_socket.recv(1024).decode('utf-8')
+            if not message:  # Break if no message is received (connection closed)
+                break
+            chat_box.insert(tk.END, "Server: " + message + "\n")
+
+    # Start a new thread to handle incoming messages
+    threading.Thread(target=receive_messages).start()
+
+    # Function to send messages to the server
+    def send_message():
+        message = message_entry.get()
+        chat_box.insert(tk.END, "Client: " + message + "\n")
+        client_socket.send(message.encode('utf-8'))
+        message_entry.delete(0, tk.END)
+
+    # Initialize the Tkinter GUI
+    root = tk.Tk()
+    root.title("Chat Client")
+
+    frame = tk.Frame(root, padx=20, pady=20)
+    frame.pack(padx=10, pady=10)
+
+    chat_box = tk.Text(frame, height=15, width=50)  # Text widget to display chat messages
+    chat_box.pack(pady=10)
+
+    message_entry = tk.Entry(frame, width=40)  # Entry widget to type messages
+    message_entry.pack(side=tk.LEFT, padx=5)
+
+    send_button = tk.Button(frame, text="Send", command=send_message)  # Button to send messages
+    send_button.pack(side=tk.RIGHT, padx=5)
+
+    root.mainloop()  # Start the Tkinter event loop
+
+    client_socket.close()  # Close the socket when the GUI is closed
+
+if len(sys.argv) != 2:
+    print("Usage: python client_chat.py <server_ip>")
+else:
+    start_client(sys.argv[1])  # Start the client with the provided server IP

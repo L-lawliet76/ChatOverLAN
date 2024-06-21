@@ -1,6 +1,6 @@
 # ChatOverLAN
 
-ChatOverLAN is a project developed to facilitate video and audio communication over a Local Area Network (LAN). This application allows users to connect via webcam and microphone, providing a simple way to chat over the network. Please note that this project works on LAN and, for using on Android, you will need Pydroid 3 Premium. It is recommended to try it on a PC for better experience. It needs webcam to for video chat, but you can still use text option.
+ChatOverLAN is a project developed to facilitate video and audio communication over a Local Area Network (LAN). This application allows users to connect via webcam and microphone, providing a simple way to chat over the network. Please note that this project works on LAN and, for using on Android, you will need Pydroid 3 Premium. It is recommended to try it on a PC for better experience.
 
 ## Contributing
 
@@ -31,11 +31,6 @@ To use ChatOverLAN, follow these steps:
 ## Usage
 
 To use ChatOverLAN, run the server and client scripts as follows:
-   ```bash
-   python HereWeGo.py
-   ```
-
-   or
 
 1. Start the server:
     ```bash
