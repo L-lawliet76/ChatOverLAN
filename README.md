@@ -31,7 +31,10 @@ To use ChatOverLAN, follow these steps:
 ## Usage
 
 To use ChatOverLAN, run the server and client scripts as follows:
-
+ 
+ ```bash
+python HereWeGo.py
+ ```
 1. Start the server:
     ```bash
     python server.py
